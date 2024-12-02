@@ -17,6 +17,7 @@
 
 package org.keycloak.models.sessions.infinispan.remotestore;
 
+import java.security.SecureRandom;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -189,7 +190,7 @@ public class RemoteCacheSessionListener<K, V extends SessionEntity>  {
                 try {
                     logger.debugf("Got replace remote entity event prematurely for entity '%s', will try again. Event version: %d, got: %d",
                             key, eventVersion, remoteSessionVersioned == null ? -1 : remoteSessionVersioned.getVersion());
-                    Thread.sleep(new Random().nextInt(sleepInterval));  // using exponential backoff
+                    Thread.sleep(new SecureRandom().nextInt(sleepInterval));  // using exponential backoff
                     continue;
                 } catch (InterruptedException ex) {
                     continue;

@@ -1,5 +1,6 @@
 package org.freedesktop.dbus.utils;
 
+import java.security.SecureRandom;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,7 +167,7 @@ public final class Util {
         if (_length <= 0) {
             return "";
         }
-        Random random = new Random();
+        Random random = new SecureRandom();
         char[] buf = new char[_length];
         for (int idx = 0; idx < buf.length; ++idx) {
             buf[idx] = SYMBOLS[random.nextInt(SYMBOLS.length)];
@@ -512,7 +513,7 @@ public final class Util {
      * @return String
      */
     public static String genGUID() {
-        Random r = new Random();
+        Random r = new SecureRandom();
         byte[] buf = new byte[16];
         r.nextBytes(buf);
         return Hexdump.toHex(buf, false);
@@ -529,7 +530,7 @@ public final class Util {
     public static String createDynamicSessionAddress(boolean _listeningSocket, boolean _abstract) {
         String address = "unix:";
         String path = new File(System.getProperty("java.io.tmpdir"), "dbus-XXXXXXXXXX").getAbsolutePath();
-        Random r = new Random();
+        Random r = new SecureRandom();
 
         do {
             StringBuffer sb = new StringBuffer();

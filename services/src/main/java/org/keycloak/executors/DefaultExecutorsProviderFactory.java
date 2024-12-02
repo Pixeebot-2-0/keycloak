@@ -17,6 +17,7 @@
 
 package org.keycloak.executors;
 
+import java.security.SecureRandom;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -199,7 +200,7 @@ public class DefaultExecutorsProviderFactory implements ExecutorsProviderFactory
         return new ThreadFactory() {
 
             private AtomicInteger i = new AtomicInteger(0);
-            private int group = new Random().nextInt(2048);
+            private int group = new SecureRandom().nextInt(2048);
 
             @Override
             public Thread newThread(Runnable r) {
