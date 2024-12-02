@@ -17,6 +17,7 @@
 
 package org.keycloak.testsuite.events;
 
+import java.security.SecureRandom;
 import org.apache.commons.lang3.StringUtils;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -335,7 +336,7 @@ public class EventStoreProviderTest extends AbstractEventsTest {
      */
     private Calendar createFromDate(String dateString) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Random random = new Random();
+        Random random = new SecureRandom();
         Calendar result = null;
         try {
             Date date = formatter.parse(dateString);

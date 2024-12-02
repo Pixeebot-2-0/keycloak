@@ -22,6 +22,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -343,7 +344,7 @@ public class ConcurrentLoginTest extends AbstractConcurrencyTest {
                     // Add some randomness to state, nonce and redirectUri. Verify that login is successful and "state" and "nonce" will match
                     oauth1.stateParamHardcoded(KeycloakModelUtils.generateId());
                     oauth1.nonce(KeycloakModelUtils.generateId());
-                    oauth1.redirectUri(oauth.getRedirectUri() + "?some=" + new Random().nextInt(1024));
+                    oauth1.redirectUri(oauth.getRedirectUri() + "?some=" + new SecureRandom().nextInt(1024));
                     return oauth1;
                 }
             };
