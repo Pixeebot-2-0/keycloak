@@ -1,5 +1,7 @@
 package org.keycloak.test.framework.server;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import io.quarkus.maven.dependency.Dependency;
 
 import java.net.ConnectException;
@@ -52,7 +54,7 @@ public class RemoteKeycloakServer implements KeycloakServer {
 
     private boolean verifyRunningKeycloak() {
         try {
-            new URL(getBaseUrl()).openConnection().connect();
+            Urls.create(getBaseUrl(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection().connect();
             return true;
         } catch (ConnectException e) {
             return false;
