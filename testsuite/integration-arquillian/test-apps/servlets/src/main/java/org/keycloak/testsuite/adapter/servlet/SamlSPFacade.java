@@ -17,6 +17,7 @@
 
 package org.keycloak.testsuite.adapter.servlet;
 
+import io.github.pixee.security.Newlines;
 import org.keycloak.dom.saml.v2.protocol.AuthnRequestType;
 import org.keycloak.saml.BaseSAML2BindingBuilder;
 import org.keycloak.saml.common.constants.JBossSAMLURIConstants;
@@ -61,7 +62,7 @@ public class SamlSPFacade extends HttpServlet {
             // Redirect
             UriBuilder builder = UriBuilder.fromUri(getSamlAuthnRequest(req));
             builder.queryParam("RelayState", RELAY_STATE);
-            resp.setHeader("Location", builder.build().toString());
+            resp.setHeader("Location", Newlines.stripAll(builder.build().toString()));
             return;
         }
 
