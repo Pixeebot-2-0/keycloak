@@ -17,6 +17,7 @@
 
 package org.keycloak.testsuite.admin.client;
 
+import io.github.pixee.security.ZipSecurity;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringReader;
@@ -336,7 +337,7 @@ public class InstallationTest extends AbstractClientTest {
 
         String clientPrivateKey = null;
         String clientCert = null;
-        try (ZipInputStream zis = new ZipInputStream(new ByteArrayInputStream(result))) {
+        try (ZipInputStream zis = ZipSecurity.createHardenedInputStream(new ByteArrayInputStream(result))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 if (entry.getName().endsWith("client-private-key.pem")) {
