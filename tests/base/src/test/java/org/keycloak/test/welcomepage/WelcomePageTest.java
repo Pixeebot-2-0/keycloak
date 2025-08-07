@@ -1,5 +1,7 @@
 package org.keycloak.test.welcomepage;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
@@ -133,7 +135,7 @@ public class WelcomePageTest {
         if (floatingIp == null) {
             throw new RuntimeException("Could not determine floating IP address.");
         }
-        return new URL("http", floatingIp, 8080, "");
+        return Urls.create("http", floatingIp, 8080, "", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     }
 
     private void assertOnAdminConsole() {

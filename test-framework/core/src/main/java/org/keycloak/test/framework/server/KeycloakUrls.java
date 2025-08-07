@@ -1,5 +1,7 @@
 package org.keycloak.test.framework.server;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.keycloak.common.util.KeycloakUriBuilder;
 
 import java.net.MalformedURLException;
@@ -35,7 +37,7 @@ public class KeycloakUrls {
 
     private URL toUrl(String url) {
         try {
-            return new URL(url);
+            return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
